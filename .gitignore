@@ -1,0 +1,5 @@
+/target
+*.zip
+*.zip.partial
+config.toml
+!crates/**/config.toml

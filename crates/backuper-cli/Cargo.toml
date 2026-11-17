@@ -1,0 +1,16 @@
+[package]
+name = "backuper-cli"
+description = "Command-line front end for Backup-er"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.104"
+backuper-core = { version = "0.1.0", path = "../backuper-core" }
+clap = { version = "4.6.8", features = ["derive"] }
+dialoguer = "0.12.0"
+indicatif = "0.18.6"
+
+[[bin]]
+name = "backuper"
+path = "src/main.rs"

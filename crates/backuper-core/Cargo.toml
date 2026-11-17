@@ -1,0 +1,18 @@
+[package]
+name = "backuper-core"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.104"
+chrono = "0.4.45"
+dirs = "7.0.0"
+globset = "0.4.21"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+toml = "1.2.1"
+walkdir = "2.5.0"
+zip = { version = "9.6.1", default-features = false, features = ["aes-crypto", "deflate"] }
+
+[dev-dependencies]
+tempfile = "3.27.0"
