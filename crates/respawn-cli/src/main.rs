@@ -1,24 +1,24 @@
-//! `backuper` command-line interface.
+//! `respawn` command-line interface.
 
 mod progress;
 
 use anyhow::{Context, Result, bail};
-use backuper_core::collect::collect;
-use backuper_core::config::Config;
-use backuper_core::restore::{ExistingPolicy, plan, restore};
-use backuper_core::{archive, drive, lockcheck, scan, verify};
 use clap::{Parser, Subcommand};
 use dialoguer::{Confirm, Password, Select, theme::ColorfulTheme};
+use respawn_core::collect::collect;
+use respawn_core::config::Config;
+use respawn_core::restore::{ExistingPolicy, plan, restore};
+use respawn_core::{archive, drive, lockcheck, scan, verify};
 use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
 #[command(
-    name = "backuper",
+    name = "respawn",
     version,
     about = "Encrypted backups of your important files, restorable to the same paths"
 )]
 struct Cli {
-    /// Use a configuration file other than the default (%APPDATA%\backuper\config.toml).
+    /// Use a configuration file other than the default (%APPDATA%\respawn\config.toml).
     #[arg(long, global = true)]
     config: Option<PathBuf>,
     #[command(subcommand)]
@@ -65,7 +65,7 @@ enum Command {
         #[arg(long)]
         dest: Option<PathBuf>,
     },
-    /// Mark a drive or folder as the backup destination (e.g. `backuper init-drive E:\`).
+    /// Mark a drive or folder as the backup destination (e.g. `respawn init-drive E:\`).
     InitDrive { root: PathBuf },
 }
 
@@ -132,7 +132,7 @@ fn init(path: &Path, force: bool) -> Result<()> {
     }
     Config::template().save(path)?;
     println!("Created {}", path.display());
-    println!("Edit it with `backuper edit`, then run `backuper scan`.");
+    println!("Edit it with `respawn edit`, then run `respawn scan`.");
     Ok(())
 }
 
@@ -147,7 +147,7 @@ fn ensure_config(path: &Path) -> Result<()> {
 fn load(path: &Path) -> Result<Config> {
     if !path.exists() {
         bail!(
-            "no configuration at {}. Run `backuper init` first.",
+            "no configuration at {}. Run `respawn init` first.",
             path.display()
         );
     }
@@ -203,7 +203,7 @@ fn resolve_dest(dest: Option<PathBuf>) -> Result<PathBuf> {
     let drives = drive::find_backup_drives();
     match drives.len() {
         0 => bail!(
-            "no backup drive found. Plug it in, or mark it once with `backuper init-drive E:\\`, or pass --dest"
+            "no backup drive found. Plug it in, or mark it once with `respawn init-drive E:\\`, or pass --dest"
         ),
         1 => Ok(drive::backup_dir(&drives[0])),
         _ => {
@@ -225,7 +225,7 @@ fn backup(cfg_path: &Path, dest: Option<PathBuf>, no_scan: bool, no_verify: bool
         scan_interactive(&mut cfg, cfg_path)?;
     }
     if cfg.include.is_empty() {
-        bail!("nothing to back up: `include` is empty. Run `backuper scan` or `backuper edit`.");
+        bail!("nothing to back up: `include` is empty. Run `respawn scan` or `respawn edit`.");
     }
 
     println!("Collecting files...");

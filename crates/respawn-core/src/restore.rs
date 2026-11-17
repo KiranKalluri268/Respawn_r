@@ -152,7 +152,7 @@ pub fn restore(
 
 fn temp_path(target: &Path) -> PathBuf {
     let mut name = target.file_name().unwrap_or_default().to_os_string();
-    name.push(".backuper-tmp");
+    name.push(".respawn-tmp");
     target.with_file_name(name)
 }
 

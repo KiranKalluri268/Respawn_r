@@ -1,7 +1,7 @@
 //! End-to-end: collect -> backup -> verify -> delete originals -> restore -> compare.
 
-use backuper_core::restore::{ExistingPolicy, plan, restore};
-use backuper_core::{archive, collect, config::Config, times, verify};
+use respawn_core::restore::{ExistingPolicy, plan, restore};
+use respawn_core::{archive, collect, config::Config, times, verify};
 use std::fs;
 use std::path::Path;
 use std::time::{Duration, SystemTime};

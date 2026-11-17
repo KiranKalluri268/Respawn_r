@@ -95,33 +95,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
-name = "backuper-cli"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "backuper-core",
- "clap",
- "dialoguer",
- "indicatif",
-]
-
-[[package]]
-name = "backuper-core"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "chrono",
- "dirs",
- "globset",
- "serde",
- "serde_json",
- "tempfile",
- "toml",
- "walkdir",
- "zip",
-]
-
-[[package]]
 name = "bitflags"
 version = "2.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -717,6 +690,33 @@ name = "regex-syntax"
 version = "0.8.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
+
+[[package]]
+name = "respawn-cli"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "dialoguer",
+ "indicatif",
+ "respawn-core",
+]
+
+[[package]]
+name = "respawn-core"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "dirs",
+ "globset",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "toml",
+ "walkdir",
+ "zip",
+]
 
 [[package]]
 name = "rustix"

@@ -21,7 +21,7 @@ pub fn read_manifest(archive: &mut Archive, password: &str) -> Result<Manifest> 
     let mut entry = match archive.by_name_decrypt(MANIFEST_ENTRY, password.as_bytes()) {
         Ok(e) => e,
         Err(ZipError::InvalidPassword) => bail!("wrong password"),
-        Err(ZipError::FileNotFound) => bail!("this archive was not created by Backup-er"),
+        Err(ZipError::FileNotFound) => bail!("this archive was not created by Respawn"),
         Err(e) => return Err(e.into()),
     };
     let mut text = String::new();

@@ -17,7 +17,7 @@ pub fn find_backup_drives() -> Vec<PathBuf> {
 
 /// Marks a drive (or any folder) as a backup destination.
 pub fn mark(root: &Path) -> Result<PathBuf> {
-    std::fs::write(root.join(MARKER), "Backup-er destination\n")
+    std::fs::write(root.join(MARKER), "Respawn destination\n")
         .with_context(|| format!("cannot write marker to {}", root.display()))?;
     let dir = backup_dir(root);
     std::fs::create_dir_all(&dir)?;

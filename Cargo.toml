@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/backuper-core", "crates/backuper-cli"]
+members = ["crates/respawn-core", "crates/respawn-cli"]
 
 [profile.release]
 opt-level = 3

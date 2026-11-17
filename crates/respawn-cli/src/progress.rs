@@ -1,7 +1,7 @@
 //! Terminal progress bars driven by core progress events.
 
-use backuper_core::Progress;
 use indicatif::{ProgressBar, ProgressStyle};
+use respawn_core::Progress;
 
 pub fn human(bytes: u64) -> String {
     const UNITS: [&str; 5] = ["B", "KB", "MB", "GB", "TB"];

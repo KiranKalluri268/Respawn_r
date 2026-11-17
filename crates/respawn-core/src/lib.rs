@@ -1,4 +1,4 @@
-//! Core logic for Backup-er: configuration, scanning, archiving, verification and restore.
+//! Core logic for Respawn: configuration, scanning, archiving, verification and restore.
 //!
 //! The library performs no terminal I/O. Front ends (CLI, TUI) receive progress through
 //! callbacks and make all interactive decisions themselves.

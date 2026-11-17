@@ -1,4 +1,4 @@
-# Backup-er
+# Respawn
 
 Encrypted, single-file backups of your important folders on Windows, restorable to the exact
 same paths on a freshly reset or new machine.
@@ -13,27 +13,27 @@ same paths on a freshly reset or new machine.
 
 ## Install
 
-Download `backuper.exe` from the GitHub releases page, or build it:
+Download `respawn.exe` from the [latest release](https://github.com/KiranKalluri268/Respawn_r/releases/latest), or build it:
 
 ```
 cargo build --release
-# binary: target\release\backuper.exe
+# binary: target\release\respawn.exe
 ```
 
 ## First-time setup
 
 ```
-backuper init             # create %APPDATA%\backuper\config.toml
-backuper edit             # adjust watch / include / exclude
-backuper init-drive E:\   # mark the external drive (once)
-backuper scan             # decide on items found in watched folders
-backuper preview          # see what will be backed up
+respawn init             # create %APPDATA%\respawn\config.toml
+respawn edit             # adjust watch / include / exclude
+respawn init-drive E:\   # mark the external drive (once)
+respawn scan             # decide on items found in watched folders
+respawn preview          # see what will be backed up
 ```
 
 ## Making a backup
 
 ```
-backuper backup
+respawn backup
 ```
 
 The backup is written to `<drive>\Backups\backup-YYYYMMDD-HHMMSS.zip`. Files that could not be
@@ -42,8 +42,8 @@ read are listed in a `.skipped.txt` file next to it.
 ## Restoring
 
 ```
-backuper restore E:\Backups\backup-20261117-153000.zip --dry-run
-backuper restore E:\Backups\backup-20261117-153000.zip
+respawn restore E:\Backups\backup-20261117-153000.zip --dry-run
+respawn restore E:\Backups\backup-20261117-153000.zip
 ```
 
 Files are restored to their original absolute paths, so every drive letter used by the backup must
@@ -68,5 +68,5 @@ cargo clippy --all-targets -- -D warnings
 cargo test
 ```
 
-The workspace is split into `backuper-core` (all logic, no terminal I/O) and `backuper-cli`
+The workspace is split into `respawn-core` (all logic, no terminal I/O) and `respawn-cli`
 (interactive front end), so other front ends can reuse the core.

@@ -1,4 +1,4 @@
-//! User configuration stored as TOML in `%APPDATA%\backuper\config.toml`.
+//! User configuration stored as TOML in `%APPDATA%\respawn\config.toml`.
 
 use crate::paths::{expand, key};
 use anyhow::{Context, Result};
@@ -57,7 +57,7 @@ impl Config {
     /// Default location of the configuration file.
     pub fn default_path() -> Result<PathBuf> {
         let base = dirs::config_dir().context("cannot locate the application data folder")?;
-        Ok(base.join("backuper").join("config.toml"))
+        Ok(base.join("respawn").join("config.toml"))
     }
 
     pub fn load(path: &Path) -> Result<Self> {
