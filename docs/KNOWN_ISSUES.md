@@ -44,3 +44,28 @@ reported as skipped. Closing these applications before a backup avoids both prob
 
 **Possible fix:** offer to copy databases through the SQLite online backup API, or retry
 files whose size or modified time changed during reading.
+
+## 5. Skip warning undercounts and the report mixes causes
+
+Before writing, the lock check warned that 6 files would be left out. The backup then
+skipped 10: four SQLite `-wal`/`-shm` files were deleted by Codex between collection and
+reading (`os error 2`). The `.skipped.txt` report lists both kinds together.
+
+**Fix:** treat files that vanish after collection as "removed during backup" rather than
+skipped, report them separately in the summary and in `.skipped.txt`, and state in the
+final message that the count may differ from the pre-backup warning.
+
+## 6. Lock and socket files are reported as unreadable
+
+Runtime files that are always held open by their owner appear in every skip report:
+
+- `.lock` and `*.sqlite-maintenance.lock` (`os error 33`)
+- `*.sock` named sockets (`os error 1920`)
+- `~/.codex/tmp`
+- OneDrive placeholder files such as `OneDrive/.849C9593-...` (`os error 32`)
+
+These carry no user data. They were excluded in a personal config, but the starter
+configuration does not exclude them.
+
+**Fix:** add `**/.lock`, `**/*.sqlite-maintenance.lock`, `**/*.sock` and `**/.codex/tmp`
+to the template `exclude` list, and skip socket/reparse-point files during collection.
